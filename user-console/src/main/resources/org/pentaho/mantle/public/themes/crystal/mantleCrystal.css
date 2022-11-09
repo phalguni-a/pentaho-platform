@@ -904,7 +904,7 @@ a:active, a:hover {
 }
 
 #pucHeader .gwt-MenuBar-horizontal .gwt-MenuItem {
-  color: #777;
+  color: #333333;.
   font-size: 13px;
   padding: 4px 12px;
 }
@@ -922,7 +922,7 @@ a:active, a:hover {
   padding: 10px 0px 10px 10px;
   width: 242px;
   font-size: 16px;
-  color: #50798c;
+  color: #436475;
   font-family: OpenSansLight, Helvetica, Arial, Sans serif;
 }
 
@@ -997,7 +997,7 @@ a:active, a:hover {
 }
 
 .gwt-MenuBar-vertical .gwt-MenuItem {
-  color: #698492;
+  color: #45575F;
   padding: 3px 20px 3px 20px;
 }
 
@@ -1162,7 +1162,7 @@ a:active, a:hover {
 .pentaho-table .cellTableHeader {
   padding: 3px 15px;
   text-align: left;
-  color: white;
+  color: #2D4149;
   overflow: hidden;
 }
 
@@ -1368,4 +1368,7 @@ a:active, a:hover {
   width: 100%;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+.pad-left{
+  color:#1973BC
 }
