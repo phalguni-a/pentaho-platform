@@ -320,6 +320,7 @@ if ( PentahoSystem.getApplicationContext().getFullyQualifiedServerURL().toLowerC
 				  var topOffset = top-offset;
 				  $('.popover').css('top', topOffset+"px");
 				  $('.arrow').css('top', offset + height / 2);
+                  document.getElementById("createNewanalyzerButton").focus();
 
 				  if (!$('.popover-title').html()) 
 						$('.popover-title').hide();

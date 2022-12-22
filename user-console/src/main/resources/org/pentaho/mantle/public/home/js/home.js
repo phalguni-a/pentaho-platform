@@ -81,6 +81,9 @@ define([
     $("#btnCreateNew").popover({
       'html': true,
       content: function () {
+        setTimeout(function () {
+          $('#createNewanalyzerButton').focus();
+        },100)
         return $('#btnCreateNewContent').html();
       }
     });

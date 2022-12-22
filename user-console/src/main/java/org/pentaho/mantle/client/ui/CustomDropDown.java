@@ -20,6 +20,9 @@
 
 package org.pentaho.mantle.client.ui;
 
+import com.google.gwt.aria.client.ExpandedValue;
+import com.google.gwt.aria.client.Id;
+import com.google.gwt.aria.client.Roles;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -128,7 +131,11 @@ public class CustomDropDown extends HorizontalPanel implements HasText {
 
     setText( labelText );
     label.setStyleName( "custom-dropdown-label" );
-    // label.addMouseListener(this);
+    label.getElement().setId(labelText.concat("-dropdown-label"));
+    this.getElement().focus();
+    Roles.getMenubarRole().setTabindexExtraAttribute(this.getElement(),0);
+    Roles.getMenubarRole().setAriaExpandedState(getElement(), ExpandedValue.FALSE);
+    Roles.getMenubarRole().setAriaLabelledbyProperty(getElement(), Id.of(label.getElement().getId()));
     add( label );
     Label dropDownArrow = new Label();
     add( dropDownArrow );
@@ -154,6 +161,7 @@ public class CustomDropDown extends HorizontalPanel implements HasText {
         if ( enabled ) {
           removeStyleDependentName( "pressed" );
           removeStyleDependentName( "hover" );
+          Roles.getMenubarRole().setAriaExpandedState(getElement(),ExpandedValue.FALSE);
         }
       }
     } );
@@ -163,11 +171,13 @@ public class CustomDropDown extends HorizontalPanel implements HasText {
 
   public void onBrowserEvent( Event event ) {
     super.onBrowserEvent( event );
-    if ( ( event.getTypeInt() & Event.ONCLICK ) == Event.ONCLICK ) {
+    if ( ( ( event.getTypeInt() & Event.ONCLICK ) == Event.ONCLICK ) ||
+            ( (char) event.getKeyCode() == KeyCodes.KEY_ENTER ) ) {
       if ( enabled && !pressed ) {
         pressed = true;
         addStyleDependentName( "pressed" );
         removeStyleDependentName( "hover" );
+        Roles.getMenubarRole().setAriaExpandedState(getElement(),ExpandedValue.TRUE);
         popup.setWidget( menuBar );
         popup.setPopupPositionAndShow( new PositionCallback() {
           public void setPosition( int offsetWidth, int offsetHeight ) {

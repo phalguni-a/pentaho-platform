@@ -28,10 +28,10 @@ define([
   //main component structure
   templates.structure = Handlebars.compile(
       "<div id='fileBrowserFolders' class='span4 well fileBrowserColumn'>" +
-          "<div class='body'></div>" +
+          "<div class='body' tabindex='0'></div>" +
           "</div>" +
           "<div id='fileBrowserFiles' class='span4 well fileBrowserColumn'>" +
-          "<div class='body'></div>" +
+          "<div class='body' tabindex='0' role='listbox' aria-labelledby='filesHeader' aria-multiselectable='false' aria-activedescendant=''></div>" +
           "</div>" +
           "<div id='fileBrowserButtons' class='span4 well fileBrowserColumn'>" +
           "<div class='body'></div>" +
@@ -45,7 +45,7 @@ define([
           "<div id='foldersHeader' class='header'>" +
           "<span>{{i18n 'folders'}}</span>" +
           "<div id='refreshBrowserIcon' class='refresh-browse-perspective pull-right'" +
-          "title={{i18n 'refresh'}} onclick='{{stringifyFunc refreshHandler}}'>" +
+          "title={{i18n 'refresh'}} onclick='{{stringifyFunc refreshHandler}}' tabindex='0'>" +
           "</div>" +
           "</div>" +
           "{{/if}}");
@@ -115,9 +115,9 @@ define([
   templates.file = Handlebars.compile(
       "{{#ifCond folder 'false' }}" +
           "{{#if trash}}" +
-          "<div id='{{id}}' class='file' origPath='{{origPath}}' path='{{path}}' type='file' ext='{{trashPath}}' title='{{trashPath}}'>" +
+          "<div id='{{id}}' class='file' origPath='{{origPath}}' path='{{path}}' type='file' ext='{{trashPath}}' title='{{trashPath}}' role='option' aria-selected='false'>" +
           "{{else}}" +
-          "<div id='{{id}}' class='file' path='{{path}}' type='file' desc='{{description}}' ext='{{fileWithExtension}}'>" +
+          "<div id='{{id}}' class='file' path='{{path}}' type='file' desc='{{description}}' ext='{{fileWithExtension}}' role='option' aria-selected='false'>" +
           "{{/if}}" +
           "<div class='icon {{classes}}'> </div>" +
           "<div class='title'>{{title}}</div>" +
@@ -125,7 +125,7 @@ define([
           "{{/ifCond}}" +
           "{{#ifCond trash 'true'}}" +
           "{{#ifCond folder 'true'}}" +
-          "<div id='{{id}}' class='file' origPath='{{trashPath}}' path='{{path}}' type='folder' ext='{{trashPath}}' title='{{trashPath}}'>" +
+          "<div id='{{id}}' class='file' origPath='{{trashPath}}' path='{{path}}' type='folder' ext='{{trashPath}}' title='{{trashPath}}' role='option' aria-selected='false'>" +
           "<div class='icon trashFolder'> </div>" +
           "<div class='title'>{{title}}</div>" +
           "</div>" +

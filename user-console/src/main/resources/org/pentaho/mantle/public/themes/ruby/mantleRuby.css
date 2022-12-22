@@ -6,6 +6,47 @@
   padding-left: 40px;
 }
 
+.gwt-ListBox:focus-visible {
+  outline: 2px solid crimson;
+  border-radius: 3px;
+}
+.fileChooserCellLabel:focus-visible{
+  outline: 2px solid crimson;
+  border-radius: 3px;
+}
+
+.fileChooserCell:focus-visible{
+  outline: 2px solid crimson;
+  border-radius: 3px;
+}
+
+#fileNameTextBox:focus-visible {
+  outline: 2px solid crimson;
+  border-radius: 3px;
+}
+
+pentaho-filechooseupimage:focus-visible {
+  background-image: url("images/up.png");
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  padding: 4px;
+  background-repeat: no-repeat;
+  background-position: 2px 4px;
+  outline: 2px solid crimson;
+  border-radius: 3px;
+}
+
+.pentaho-filechooseupimage {
+  background-image: url("images/up.png");
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  padding: 2px;
+  background-repeat: no-repeat;
+  background-position: 2px 4px;
+}
+
 #adminContentPanel.vbox > tbody > tr > td {
   height: 100%;
 }
@@ -497,12 +538,11 @@ a:active, a:hover {
 }
 
 .gwt-Button {
-  background-image: expression('url(buttonbg.gif)');
-  background-image: url(../../buttonbg.gif);
-  font-weight: normal;
-  border-style: solid;
-  border-color: #000000;
-  border-width: 1px;
+  border-color: #FFF;
+  border-width: 0.1px;
+  background-color:#FFF;
+  padding: 3px;
+  height: 30px;
 }
 
 .gwt-Button:hover {
@@ -520,6 +560,11 @@ a:active, a:hover {
   border-style: solid;
   border-color: #c0c0c0;
   border-width: 1px;
+}
+
+.gwt-Button:focus-visible{
+  outline: 2px solid crimson;
+  border-radius: 3px;
 }
 
 .gwt-Canvas {
@@ -873,6 +918,13 @@ a:active, a:hover {
   border-bottom: 0px solid transparent;
 }
 
+#pucPerspectives .custom-dropdown:focus-visible,#pucPerspectives .custom-dropdown:hover {
+  background: #CC0000;
+  color: #FFFFFF;
+  /*outline: 2px solid crimson;*/
+  /*border-radius: 3px;*/
+}
+
 .custom-dropdown-pressed {
   border-top: 1px solid #CCC;
   border-right: 1px solid #CCC;
@@ -902,6 +954,11 @@ a:active, a:hover {
 #pucUserDropDown .custom-dropdown {
   width: auto;
   min-width: 105px;
+}
+
+#pucUserDropDown .custom-dropdown:focus-visible,#pucUserDropDown .custom-dropdown:hover {
+  background: #CC0000;
+  color: #FFFFFF !important;
 }
 
 #pucUserDropDown .custom-dropdown-arrow {

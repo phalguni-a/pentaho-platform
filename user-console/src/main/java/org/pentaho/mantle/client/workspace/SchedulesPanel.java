@@ -16,6 +16,8 @@
  */
 package org.pentaho.mantle.client.workspace;
 
+import com.google.gwt.aria.client.Roles;
+import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
@@ -43,11 +45,7 @@ import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.*;
 import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.MultiSelectionModel;
@@ -445,6 +443,12 @@ public class SchedulesPanel extends SimplePanel {
           return BLANK_VALUE;
         }
       }
+
+      @Override
+      public void render(Cell.Context context, JsJob object, SafeHtmlBuilder sb) {
+        SafeHtml safeHtml = sb.toSafeHtml();
+        super.render(context, object, sb);
+      }
     };
     userNameColumn.setSortable( true );
 
@@ -499,6 +503,7 @@ public class SchedulesPanel extends SimplePanel {
 
     // table.addColumn(idColumn, "ID");
     table.addColumn( nameColumn, Messages.getString( "scheduleName" ) );
+    table.setTabIndex(0);
     table.addColumn( scheduleColumn, Messages.getString( "recurrence" ) );
     table.addColumn( resourceColumn, Messages.getString( "sourceFile" ) );
     table.addColumn( outputPathColumn, Messages.getString( "outputPath" ) );

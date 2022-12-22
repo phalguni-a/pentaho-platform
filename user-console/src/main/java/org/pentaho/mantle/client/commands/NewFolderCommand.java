@@ -20,6 +20,8 @@
 
 package org.pentaho.mantle.client.commands;
 
+import com.google.gwt.aria.client.Roles;
+import com.google.gwt.user.client.ui.FocusWidget;
 import org.pentaho.gwt.widgets.client.dialogs.IDialogCallback;
 import org.pentaho.gwt.widgets.client.dialogs.MessageDialogBox;
 import org.pentaho.gwt.widgets.client.dialogs.PromptDialogBox;
@@ -100,8 +102,10 @@ public class NewFolderCommand extends AbstractCommand {
     event.setAction( this.getClass().getName() );
 
     final TextBox folderNameTextBox = new TextBox();
-    folderNameTextBox.setTabIndex( 1 );
+    folderNameTextBox.setTabIndex( 0 );
     folderNameTextBox.setVisibleLength( 40 );
+    Roles.getTextboxRole().setAriaLabelProperty(folderNameTextBox.getElement(), Messages.getString( "newFolderName" ));
+    folderNameTextBox.setFocus( true );
 
     VerticalPanel vp = new VerticalPanel();
     vp.add( new Label( Messages.getString( "newFolderName" ) ) ); //$NON-NLS-1$
@@ -110,7 +114,9 @@ public class NewFolderCommand extends AbstractCommand {
         new PromptDialogBox(
             Messages.getString( "newFolder" ), Messages.getString( "ok" ), Messages.getString( "cancel" ), false, true, vp ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
     newFolderDialog.setFocusWidget( folderNameTextBox );
-    folderNameTextBox.setFocus( true );
+    Roles.getDialogRole().set(newFolderDialog.getElement());
+    Roles.getDialogRole().setAriaLabelProperty(newFolderDialog.getElement(), Messages.getString( "newFolder" ) );
+
 
     final IDialogCallback callback = new IDialogCallback() {
 

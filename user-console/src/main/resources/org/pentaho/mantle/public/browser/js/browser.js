@@ -1259,7 +1259,10 @@ define([
     events: {
       "click div.file": "clickFile",
       "dblclick div.file": "doubleClickFile",
-      "click": "clickBody"
+      "click": "clickBody",
+      "keydown": "selectFile",
+      "keydown div.file": "selectFile"
+
     },
 
     initialize: function () {
@@ -1318,6 +1321,63 @@ define([
         myself.model.set("runSpinner", false);
       }, 100);
     },
+
+    selectFile: function (event) {
+      var allFiles = Array.prototype.slice.call(this.el.querySelectorAll('[role="option"]'));
+      var activeDescendant = this.el.getAttribute('aria-activedescendant');
+      var currentFile = document.getElementById( activeDescendant ) || allFiles[0];
+      var code = event.keyCode || event.which;
+      currentFile.classList.remove("focused");
+      if (code === 13){
+        currentFile.classList.add("selected");
+        this.clickFile(event);
+      }
+
+      if (!currentFile) {
+        return;
+      }
+      currentFile.setAttribute('aria-selected', 'false');
+      currentFile.classList.remove("focused");
+
+
+      if ( code === 38 || code === 40){
+          if ( !activeDescendant ){
+            this.focusFile( currentFile );
+          }else {
+            var nextFile = code == 38 ? this.findPreviousFile(currentFile) : this.findNextFile(currentFile);
+            this.focusFile(nextFile);
+          }
+      }
+    },
+    focusFile: function ( item ){
+      if (item != null){
+        item.setAttribute('aria-selected', 'true');
+        this.el.setAttribute('aria-activedescendant',item.id);
+        item.classList.add("focused");
+      }
+    },
+
+    findPreviousFile: function (file){
+      var allFiles = Array.prototype.slice.call(this.el.querySelectorAll('[role="option"]'));
+      var currentIndex = allFiles.indexOf( file )
+
+      if (currentIndex > -1 && currentIndex > 0 ){
+        return allFiles[currentIndex - 1 ];
+      }
+      return null;
+
+    },
+
+    findNextFile: function ( file ){
+      var allFiles = Array.prototype.slice.call(this.el.querySelectorAll('[role="option"]'));
+      var currentIndex = allFiles.indexOf( file )
+
+      if (currentIndex > -1 && currentIndex < allFiles.length - 1 ){
+        return allFiles[currentIndex + 1 ];
+      }
+      return null;
+    },
+
 
     clickFile: function (event) {
       var prevClicked = this.model.get("clickedFile");

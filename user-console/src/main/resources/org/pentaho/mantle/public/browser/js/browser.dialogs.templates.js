@@ -20,9 +20,9 @@ define(["common-ui/handlebars"],
       var templates = {};
 
       templates.dialog = Handlebars.compile(
-          "<div id='{{dialog.id}}' class='pentaho-dialog modal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-keyboard='true'>" +
+          "<div id='{{dialog.id}}' class='pentaho-dialog modal' tabindex='0' role='dialog' aria-labelledby='myModalLabel-{{dialog.id}}' aria-modal='true' data-keyboard='true' aria-describedby='dialogContent-{{dialog.id}}'>" +
               "<div class='header Caption'>" +
-              "<div class='header-content'>" +
+              "<div class='header-content' id='myModalLabel-{{dialog.id}}'>" +
               "{{{dialog.content.header}}}" +
               "</div>" +
               "<div class='dialog-close-button pentaho-closebutton-big'></div>" +
@@ -38,7 +38,7 @@ define(["common-ui/handlebars"],
       templates.buttons = Handlebars.compile(
           "<div class='button-panel right'>" +
               "<button class='ok pentaho-button'>{{ok}}</button>" +
-              "<button class='cancel pentaho-button' data-dismiss='modal' aria-hidden='true'>{{cancel}}</button>" +
+              "<button class='cancel pentaho-button' data-dismiss='modal'>{{cancel}}</button>" +
               "</div>");
 
       templates.centered_button = Handlebars.compile(

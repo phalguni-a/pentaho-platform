@@ -355,6 +355,16 @@ code {
   font-size: 13px;
 }
 
+.gwt-ListBox:focus-visible {
+  outline: 2px solid crimson;
+  border-radius: 3px;
+}
+
+.gwt-TextBox:focus-visible {
+  outline: 2px solid crimson;
+  border-radius: 3px;
+}
+
 .menuBarAndLogoPanel {
 
 }

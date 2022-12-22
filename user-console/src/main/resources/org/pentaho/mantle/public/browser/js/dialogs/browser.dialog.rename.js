@@ -166,6 +166,26 @@ define([
     overrideType: "file",
 
     events: {
+      'keydown #do-not-show': 'keyDownAction',
+      'click #do-not-show': 'checkboxClickAction'
+    },
+
+    keyDownAction: function (e) {
+      var code = e.keyCode || e.which;
+      if ( code == 32 ){
+        this.toggleCheckbox(e);
+      }
+    },
+    checkboxClickAction: function (e) {
+      this.toggleCheckbox(e);
+    },
+
+    toggleCheckbox: function(event){
+      if (event.currentTarget.getAttribute("aria-checked") === "true"){
+        event.currentTarget.setAttribute("aria-checked", 'false');
+      }else {
+        event.currentTarget.setAttribute("aria-checked", 'true');
+      }
     },
 
     initialize: function () {
@@ -191,6 +211,7 @@ define([
 
       var onOverrideShow = function () {
         this.$dialog.find("#do-not-show").prop("checked", false);
+        this.$dialog.find("#do-not-show").setAttribute("aria-checked", 'false');
       };
 
       this.initFolderOverrideDialog(this.makeOverrideDialogCfg("dialogOverrideFolder", RenameTemplates.dialogFolderOverride), onOverrideOk, onOverrideShow);
